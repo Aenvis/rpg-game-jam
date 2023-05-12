@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
   m_Name: dupa
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: dupa
   icon: {fileID: 0}
   model: {fileID: 0}
   description: 

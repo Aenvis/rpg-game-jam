@@ -26,23 +26,29 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(moveX, 0, moveZ);
         move *= speed;
 
+        // Check if the character is grounded
         if (controller.isGrounded)
         {
-            moveDirection = move;
-
+            // If grounded, we allow to set the jump force
             if (Input.GetButtonDown("Jump"))
             {
                 moveDirection.y = jumpForce;
             }
+            else
+            {
+                // Apply a small downward force to keep player grounded
+                moveDirection.y = -0.5f;
+            }
         }
         else
         {
-            moveDirection.x = move.x;
-            moveDirection.z = move.z;
+            // Apply gravity when not grounded
+            moveDirection.y += gravity * Time.deltaTime;
         }
 
-        // Apply gravity
-        moveDirection.y += gravity * Time.deltaTime;
+        // Set horizontal movement
+        moveDirection.x = move.x;
+        moveDirection.z = move.z;
 
         // Move the controller
         controller.Move(moveDirection * Time.deltaTime);

@@ -6,8 +6,8 @@ namespace DefaultNamespace
     public class Player : MonoBehaviour
     {
         [SerializeField] [CanBeNull] private AlcoholSO alcoholInHand = null;
-
-        public float AlcoholFactor => alcoholInHand.alcoholFactor;
+        
+        public float AlcoholFactor => alcoholInHand?.alcoholFactor ?? 0f;
 
         public bool HasAlcohol => alcoholInHand is not null;
 

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AlcoholSO testAlcohol;
 
-    private float _perMileMeter;
+    private PerMileMeter _perMileMeter;
     
     private void Awake()
     {
@@ -29,17 +29,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
      SeedPlayerData();
-     _perMileMeter = startPerMileValue;
+     _perMileMeter = new PerMileMeter(startPerMileValue);
     }
     
     private void Update()
     {
-        _perMileMeter -= factor;
-        if (_perMileMeter <= 0)
+        _perMileMeter.Add(-factor);
+        
+        if (_perMileMeter.Value <= 0)
             EndGame();
         
-        Debug.Log(_perMileMeter / 100f);
-
         Input();
     }
 
@@ -60,7 +59,9 @@ public class GameManager : MonoBehaviour
     {
         if (!player.HasAlcohol) return;
 
-        _perMileMeter += player.AlcoholFactor * startPerMileValue;
+        var perMileValue = player.AlcoholFactor * startPerMileValue; 
+        _perMileMeter.Add(perMileValue);
+        
         Debug.Log($"Added: {player.AlcoholFactor * startPerMileValue}");
     }
 

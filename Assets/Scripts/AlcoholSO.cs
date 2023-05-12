@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 [Serializable]
@@ -14,6 +16,5 @@ public enum Alcohol
 public class AlcoholSO : ScriptableObject
 {
     public Alcohol type;
-    
     [Range(-1f, 1f)]public float alcoholFactor;
 }

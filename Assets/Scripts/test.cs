@@ -9,8 +9,6 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dynamicInventory = GetComponent<DynamicInventory>();
-        Debug.Log(item1.name);
         dynamicInventory.AddItem(item1);
         dynamicInventory.AddItem(item1);
         dynamicInventory.DeleteItem(item1);

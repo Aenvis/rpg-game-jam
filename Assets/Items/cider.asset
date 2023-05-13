@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: cider
   m_EditorClassIdentifier: 
   itemName: cider
-  icon: {fileID: 21300000, guid: 02a471a08e89a9744ae9b2736ca733f3, type: 3}
-  model: {fileID: 919132149155446097, guid: 61a5b0a6723b5354eb19895d41911f3c, type: 3}
+  alcoholData: {fileID: 11400000, guid: 4f80e1c849a987044bee725636f2b655, type: 2}
+  icon: {fileID: 21300000, guid: 0f29f89999ae98845a972de23f6ca694, type: 3}
+  model: {fileID: 0}
   description: 

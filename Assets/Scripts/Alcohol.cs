@@ -4,7 +4,7 @@ namespace DefaultNamespace
 {
     public class Alcohol : MonoBehaviour
     {
-        public AlcoholSO data;
+        public ItemData data;
         
     }
 }

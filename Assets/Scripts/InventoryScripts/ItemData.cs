@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public string itemName;
+    public AlcoholSO alcoholData;
     public Sprite icon;
     public GameObject model;
     [TextArea]

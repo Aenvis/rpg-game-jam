@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Assuming left mouse button for attack
         {
-            animator.SetBool("Attack", true);
+            animator.SetBool("Slap", true);
         }
         else
         {
-            animator.SetBool("Attack", false);
+            animator.SetBool("Slap", false);
         }
         if (Input.GetKeyDown(KeyCode.B))
         {

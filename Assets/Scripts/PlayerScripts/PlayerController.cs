@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // Check if pickup or dead animation is playing
-        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead"))
+        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap"))
         {
             return;
         }
@@ -100,11 +100,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Assuming left mouse button for attack
         {
-            animator.SetBool("Attack", true);
-        }
-        else
-        {
-            animator.SetBool("Attack", false);
+            animator.SetBool("Slap", true);
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
@@ -144,6 +140,11 @@ public class PlayerController : MonoBehaviour
             itemToPickUp = null;
         }
         animator.SetBool("Pickup", false);
+    }
+
+    public void EndSlap()
+    {
+        animator.SetBool("Slap", false);
     }
 
     public void EndPour()

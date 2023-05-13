@@ -1,11 +1,9 @@
 using System;
-using System.ComponentModel;
-using JetBrains.Annotations;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
-[CreateAssetMenu(menuName = "Alcohol", fileName = "NewAlcoholSO", order = 1)]
+[CreateAssetMenu(menuName = "Alcohol/New Alcohol", fileName = "NewAlcoholSO", order = 1)]
 public class AlcoholSO : ScriptableObject
 {
 
@@ -17,5 +15,16 @@ public class AlcoholSO : ScriptableObject
     }
 
     public Alcohol type;
-    [Range(-1f, 1f)]public float alcoholFactor;
+    [Range(-1f, 1f)][SerializeField]private float alcoholFactor;
+
+    public float AlcoholFactor
+    {
+        get
+        {
+            if (type is Alcohol.Beer) return alcoholFactor;
+            
+            var random = Random.Range(0, 2);
+            return random == 0 ? math.abs(alcoholFactor) : -math.abs(alcoholFactor);
+        }
+    }
 }

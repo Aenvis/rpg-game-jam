@@ -1,22 +1,24 @@
 using DefaultNamespace;
+using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField] private AlcoholSO testAlcohol;
     [SerializeField]private Player player;
+    [SerializeField] private DynamicInventory inventory;
+    [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
     [SerializeField] private float startPerMileValue;
     [SerializeField] private float factor;
-
-    [SerializeField] private AlcoholSO testAlcohol;
+    
+    private PerMileMeter _perMileMeter;
 
     public bool PlayerCanPickup => player.CanPickup;
     public bool PlayerCanPour => player.HasAlcoholInHand;
 
-    private PerMileMeter _perMileMeter;
-    
     private void Awake()
     {
         if (Instance != null)
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         _perMileMeter.Add(-factor);
+        if(perMileValueTxt is not null) perMileValueTxt.text = _perMileMeter.Value.ToString();
         
         if (_perMileMeter.Value <= 0)
             EndGame();        
@@ -53,8 +56,11 @@ public class GameManager : MonoBehaviour
         {
         }
     }
-    
-    public void PickupAlcohol(Alcohol alcohol) => player.Pickup(alcohol.data);
+
+    public void PickupAlcohol(ItemData item)
+    {
+        player.Pickup(item.alcoholData);
+    }
 
     public void PourAlcohol()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DefaultNamespace;
 
 public class PlayerController : MonoBehaviour
 {
@@ -58,11 +59,12 @@ public class PlayerController : MonoBehaviour
                     itemToPickUp = hit.collider.gameObject;
                     if (itemToPickUp.layer == LayerMask.NameToLayer("Stary"))
                     {
-                        animator.SetBool("Pour", true);  // play the special pickup animation
+                        Pour();
                     }
-                    else
+                    else if(itemToPickUp.layer == LayerMask.NameToLayer("Interactable"))
                     {
-                        animator.SetBool("Pickup", true);
+                        var alcoholData = itemToPickUp.GetComponent<Alcohol>();
+                        Pickup(alcoholData);
                     }
                 }
             }
@@ -111,6 +113,22 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void Pickup(Alcohol alcohol)
+    {
+        if (!GameManager.Instance.PlayerCanPickup) return;
+
+        animator.SetBool("Pickup", true);
+        GameManager.Instance.PickupAlcohol(alcohol);
+    }
+
+    private void Pour()
+    {
+        if (!GameManager.Instance.PlayerCanPour) return;
+        
+        animator.SetBool("Pour", true);  // play the special pickup animation
+        GameManager.Instance.PourAlcohol();
     }
 
     public void EndPickup()

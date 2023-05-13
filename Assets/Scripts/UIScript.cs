@@ -15,14 +15,21 @@ public class UIScript : MonoBehaviour
         items = inventory.items;
         for(int i = 0; i<items.Length; i++)
         {
-            if (items[i] == null)
+            if (i >= slots.Length)
             {
-                slots[i].SetActive(false);
+                break;
             }
             else
             {
-                slots[i].GetComponent<Image>().sprite = items[i].icon;
-                slots[i].SetActive(true);
+                if (items[i] == null)
+                {
+                    slots[i].SetActive(false);
+                }
+                else
+                {
+                    slots[i].GetComponent<Image>().sprite = items[i].icon;
+                    slots[i].SetActive(true);
+                }
             }
         }
     }

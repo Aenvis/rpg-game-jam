@@ -2,7 +2,6 @@ using DefaultNamespace;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AlcoholSO testAlcohol;
     [SerializeField]private Player player;
+    [SerializeField] private DynamicInventory inventory;
     [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
     [SerializeField] private float startPerMileValue;
     [SerializeField] private float factor;
@@ -56,8 +56,11 @@ public class GameManager : MonoBehaviour
         {
         }
     }
-    
-    public void PickupAlcohol(Alcohol alcohol) => player.Pickup(alcohol.data);
+
+    public void PickupAlcohol(ItemData item)
+    {
+        player.Pickup(item.alcoholData);
+    }
 
     public void PourAlcohol()
     {

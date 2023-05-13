@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        GameManager.Instance.EndGameEvent.AddListener(KillPlayer);
+
     }
 
     void Update()
@@ -102,14 +104,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Slap", true);
         }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            animator.SetBool("Dead", true);
-        }
-        else
-        {
-            animator.SetBool("Dead", false);
-        }
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
@@ -151,5 +145,10 @@ public class PlayerController : MonoBehaviour
     {
         //TODO STARY PIJANY
         animator.SetBool("Pour", false);
+    }
+
+    public void KillPlayer()
+    {
+        animator.SetBool("Dead", true);
     }
 }

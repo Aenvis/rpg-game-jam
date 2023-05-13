@@ -15,6 +15,7 @@ public class UIScript : MonoBehaviour
         items = inventory.items;
         for(int i = 0; i<items.Length; i++)
         {
+            Debug.Log("Position: " + i + ", Slots: " + slots.Length);
             if (items[i] == null)
             {
                 slots[i].SetActive(false);

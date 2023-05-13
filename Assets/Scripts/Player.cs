@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         [SerializeField] [CanBeNull] private AlcoholSO alcoholInHand = null;
         
-        public float AlcoholFactor => alcoholInHand?.alcoholFactor ?? 0f;
+        public float AlcoholFactor => alcoholInHand?.AlcoholFactor ?? 0f;
 
         public bool HasAlcoholInHand => alcoholInHand is not null;
         public bool CanPickup => !HasAlcoholInHand;

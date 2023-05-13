@@ -1,11 +1,38 @@
 fileFormatVersion: 2
-guid: 74377be368028b246b0bdedb26aba21e
+guid: 2a7009ba17bb4f64ab5e7940ed13d6ca
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
-    second: mixamo.com
+      74: 7595975376022935189
+    second: 00Tpose
+  - first:
+      74: 304617698251188003
+    second: 01Sleep
+  - first:
+      74: -5842070929984778799
+    second: 02Stomach
+  - first:
+      74: 5278324658415650055
+    second: 00Tpose.001
+  - first:
+      74: -2219933907882244997
+    second: UpArm.:|00Tpose
+  - first:
+      74: -6335210936871477031
+    second: UpArm.:|01Sleep
+  - first:
+      74: 2116902756647114627
+    second: UpArm.:|02Stomach
+  - first:
+      74: -1677967468668843379
+    second: UpArm.:|03Drinking
+  - first:
+      74: -4568610347096288359
+    second: UpArm.:|04Slap
+  - first:
+      74: 8134807869067500098
+    second: UpArm.:|UpArm.:Action
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -79,13 +106,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - a54b96d1617d87047a6c5503eae9683a
-  - deb5570c30a1df24a94d05f4daade3b2
-  - c46d818b153193743a3e507e6aa0d448
-  - 6d62076834358b441b15e5bece16f594
-  - f2dd5cf760576c84b930cbb2ce80fe39
-  - 57bce5e396d2ea640aa7a48894c9575e
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

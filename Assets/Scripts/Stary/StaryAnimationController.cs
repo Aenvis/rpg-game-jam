@@ -4,8 +4,8 @@ using System.Collections;
 public class StaryAnimationController : MonoBehaviour
 {
     private Animator animator;
-    public float minWaitTime = 5f; // Minimum time to wait before changing idle animation
-    public float maxWaitTime = 15f; // Maximum time to wait before changing idle animation
+    public float minWaitTime = 3f; // Minimum time to wait before changing idle animation
+    public float maxWaitTime = 12f; // Maximum time to wait before changing idle animation
 
     void Start()
     {

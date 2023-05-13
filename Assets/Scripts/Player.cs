@@ -9,15 +9,16 @@ namespace DefaultNamespace
         
         public float AlcoholFactor => alcoholInHand?.alcoholFactor ?? 0f;
 
-        public bool HasAlcohol => alcoholInHand is not null;
+        public bool HasAlcoholInHand => alcoholInHand is not null;
+        public bool CanPickup => !HasAlcoholInHand;
 
         public void Pickup(AlcoholSO newAlcohol)
         { 
-            if (HasAlcohol) return;
+            if (HasAlcoholInHand) return;
 
             alcoholInHand = newAlcohol;
         }
 
-        public void GiveAlcohol() => alcoholInHand = null;
+        public void Pour() => alcoholInHand = null;
     }
 }

@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AlcoholSO testAlcohol;
 
+    public bool PlayerCanPickup => player.CanPickup;
+    public bool PlayerCanPour => player.HasAlcoholInHand;
+
     private PerMileMeter _perMileMeter;
     
     private void Awake()
@@ -28,7 +31,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-     SeedPlayerData();
      _perMileMeter = new PerMileMeter(startPerMileValue);
     }
     
@@ -37,9 +39,7 @@ public class GameManager : MonoBehaviour
         _perMileMeter.Add(-factor);
         
         if (_perMileMeter.Value <= 0)
-            EndGame();
-        
-        Input();
+            EndGame();        
     }
 
     private void SeedPlayerData()
@@ -51,18 +51,20 @@ public class GameManager : MonoBehaviour
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.A))
         {
-            GiveAlcohol();
         }
     }
     
-    private void GiveAlcohol()
+    public void PickupAlcohol(Alcohol alcohol) => player.Pickup(alcohol.data);
+
+    public void PourAlcohol()
     {
-        if (!player.HasAlcohol) return;
+        if (!player.HasAlcoholInHand) return;
 
         var perMileValue = player.AlcoholFactor * startPerMileValue; 
         _perMileMeter.Add(perMileValue);
         
         Debug.Log($"Added: {player.AlcoholFactor * startPerMileValue}");
+        player.Pour();
     }
 
     private void EndGame()

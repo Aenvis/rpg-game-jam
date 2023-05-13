@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DynamicInventory : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class DynamicInventory : MonoBehaviour
             if (items[i] == null)
             {
                 items[i] = itemToAdd;
+                InventoryEvent.Instance.MyEvent.Invoke();
                 Debug.Log("Item added at position " + i);
                 return true;
 
@@ -27,6 +30,7 @@ public class DynamicInventory : MonoBehaviour
         if (position != -1)
         {
             items[position] = null;
+            InventoryEvent.Instance.MyEvent.Invoke();
             Debug.Log("Item successuffly deleted from position " + position);
             return true;
         }

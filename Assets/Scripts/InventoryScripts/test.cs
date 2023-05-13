@@ -8,6 +8,7 @@ public class test : MonoBehaviour
     public ItemData item2;
     public ItemData item3;
     public ItemData item4;
+    public ItemData item5;
     public DynamicInventory dynamicInventory;
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,10 @@ public class test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             dynamicInventory.AddItem(item4);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            dynamicInventory.AddItem(item5);
         }
     }
 }

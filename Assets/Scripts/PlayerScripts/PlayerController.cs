@@ -10,10 +10,15 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    public float pickupRange = 5.0f;
+    public float pickupAngle = 45.0f;
+    public int pickupRays = 10;
+    public LayerMask pickupLayer;     
 
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
     private Animator animator;
+    private GameObject itemToPickUp;
 
     void Start()
     {
@@ -32,6 +37,26 @@ public class PlayerController : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Pickup") || animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
         {
             return; // Do not execute further code in the Update function
+        }
+
+        for (int i = 0; i < pickupRays; i++)
+        {
+            float angle = i * pickupAngle / (pickupRays - 1) - pickupAngle / 2;
+            Vector3 pickupDirection = Quaternion.Euler(0, angle, 0) * transform.forward;
+
+            // Debug draw the ray
+            Debug.DrawRay(transform.position, pickupDirection * pickupRange, Color.red);
+
+            if (Physics.Raycast(transform.position, pickupDirection, out RaycastHit hit, pickupRange, pickupLayer))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    animator.SetBool("Pickup", true);
+                    //TODO Add code to pick up the item, e.g.:
+                    //Destroy(hit.collider.gameObject);
+                    itemToPickUp = hit.collider.gameObject;
+                }
+            }
         }
 
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -70,16 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Attack", false);
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            animator.SetBool("Pickup", true);
-        }
-        else
-        {
-            animator.SetBool("Pickup", false);
-        }
-
         if (Input.GetKeyDown(KeyCode.B))
         {
             animator.SetBool("Dead", true);
@@ -91,5 +106,15 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void EndPickup()
+    {
+        if (itemToPickUp != null)
+        {
+            Destroy(itemToPickUp);
+            itemToPickUp = null;
+        }
+        animator.SetBool("Pickup", false);
     }
 }

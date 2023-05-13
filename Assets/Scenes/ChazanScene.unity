@@ -451,6 +451,7 @@ MonoBehaviour:
   item1: {fileID: 11400000, guid: b9e0aabd6bdad074e97294a29059e85c, type: 2}
   item2: {fileID: 11400000, guid: 54e5e944947e55045bc6af6322df58c5, type: 2}
   item3: {fileID: 11400000, guid: ea6dca081701d994ab1313ab4007e3c2, type: 2}
+  item4: {fileID: 11400000, guid: 218e778c65c0cdc4c89159abaa3cd58c, type: 2}
   dynamicInventory: {fileID: 1100260073}
 --- !u!4 &398424981
 Transform:

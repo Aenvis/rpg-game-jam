@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public float pickupRange = 5.0f;
+    public float pickupRange = 2.0f;
     public float pickupAngle = 45.0f;
     public int pickupRays = 10;
+    public int verticalPickupRays = 10;
+    public float rayOriginHeight = 1.0f;
     public LayerMask pickupLayer;     
 
     private CharacterController characterController;
@@ -33,28 +35,35 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // Check if pickup or dead animation is playing
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Pickup") || animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead"))
         {
-            return; // Do not execute further code in the Update function
+            return;
         }
+
+        Vector3 rayOrigin = transform.position + Vector3.up * rayOriginHeight;
 
         for (int i = 0; i < pickupRays; i++)
         {
-            float angle = i * pickupAngle / (pickupRays - 1) - pickupAngle / 2;
+            float angle = Mathf.Lerp(-pickupAngle / 2, pickupAngle / 2, (float)i / (pickupRays - 1));
             Vector3 pickupDirection = Quaternion.Euler(0, angle, 0) * transform.forward;
 
-            // Debug draw the ray
-            Debug.DrawRay(transform.position, pickupDirection * pickupRange, Color.red);
+            Debug.DrawRay(transform.position + Vector3.up * rayOriginHeight, pickupDirection * pickupRange, Color.red);
 
-            if (Physics.Raycast(transform.position, pickupDirection, out RaycastHit hit, pickupRange, pickupLayer))
+            if (Physics.SphereCast(transform.position + Vector3.up * rayOriginHeight, 0.1f, pickupDirection, out RaycastHit hit, pickupRange, pickupLayer))
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    animator.SetBool("Pickup", true);
-                    //TODO Add code to pick up the item, e.g.:
-                    //Destroy(hit.collider.gameObject);
                     itemToPickUp = hit.collider.gameObject;
+                    if (itemToPickUp.layer == LayerMask.NameToLayer("Stary"))
+                    {
+                        animator.SetBool("Pour", true);  // play the special pickup animation
+                    }
+                    else
+                    {
+                        animator.SetBool("Pickup", true);
+                    }
                 }
             }
         }
@@ -110,11 +119,18 @@ public class PlayerController : MonoBehaviour
 
     public void EndPickup()
     {
+        //TODO PODNOSZENIE DO EQ
         if (itemToPickUp != null)
         {
             Destroy(itemToPickUp);
             itemToPickUp = null;
         }
         animator.SetBool("Pickup", false);
+    }
+
+    public void EndPour()
+    {
+        //TODO STARY PIJANY
+        animator.SetBool("Pour", false);
     }
 }

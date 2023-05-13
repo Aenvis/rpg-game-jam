@@ -1,70 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float jumpForce = 2.0f;
-    public float gravity = -9.8f;
-    private Vector3 moveDirection = Vector3.zero;
-    private CharacterController controller;
-    public Animator animator;
-    public string attackAnimationName = "Attack";
+    public CinemachineFreeLook freeLookCamera;
+    public float speed = 6.0f;
+    public float rotationSpeed = 5.0f; // Adjust this value to make rotation slower or faster
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
 
-    // Start is called before the first frame update
+    private CharacterController characterController;
+    private Vector3 moveDirection = Vector3.zero;
+    private Animator animator; // Animator component reference
+
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        if (freeLookCamera == null)
+        {
+            Debug.LogError("Free Look Camera is not attached.");
+        }
+
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>(); // Get the Animator component
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(moveX, 0, moveZ);
-        move *= speed;
+        // Get the input direction relative to the camera's rotation
+        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        direction = Quaternion.Euler(0, freeLookCamera.m_XAxis.Value, 0) * direction;
 
-        // Check if the character is grounded
-        if (controller.isGrounded)
+        if (characterController.isGrounded)
         {
-            // If grounded, we allow to set the jump force
+            // We are grounded, so recalculate move direction based on axes
+            moveDirection = direction * speed;
+
+            // Rotate the player to the direction of movement
+            if (direction != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
+            }
+
+            // Set the Speed parameter for the Animator
+            animator.SetFloat("Speed", direction.magnitude);
+
             if (Input.GetButtonDown("Jump"))
             {
-                moveDirection.y = jumpForce;
+                moveDirection.y = jumpSpeed;
+                // Set the Jump parameter for the Animator
+                animator.SetBool("Jump", true);
             }
             else
             {
-                // Apply a small downward force to keep player grounded
-                moveDirection.y = -0.5f;
+                // Reset the Jump parameter when not jumping
+                animator.SetBool("Jump", false);
+            }
+
+            if (Input.GetMouseButtonDown(0)) // Assuming left mouse button for attack
+            {
+                // Set the Attack parameter for the Animator
+                animator.SetBool("Attack", true);
+            }
+            else
+            {
+                // Reset the Attack parameter when not attacking
+                animator.SetBool("Attack", false);
             }
         }
         else
         {
-            // Apply gravity when not grounded
-            moveDirection.y += gravity * Time.deltaTime;
-        }
+            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+            // as an acceleration (ms^-2).
+            moveDirection.y -= gravity * Time.deltaTime;
 
-        // Set horizontal movement
-        moveDirection.x = move.x;
-        moveDirection.z = move.z;
+            // Reset the Jump parameter when in the air
+            animator.SetBool("Jump", false);
+        }
 
         // Move the controller
-        controller.Move(moveDirection * Time.deltaTime);
-
-        // Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
-    }
-
-    void Attack()
-    {
-        if (animator != null)
-        {
-            animator.Play(attackAnimationName);
-        }
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 }

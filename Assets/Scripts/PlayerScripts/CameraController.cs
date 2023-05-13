@@ -15,13 +15,13 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        /*if (Input.GetMouseButton(1))
         {
             freeLookCamera.m_XAxis.m_MaxSpeed = 2500; // Replace with your value
         }
         else
         {
             freeLookCamera.m_XAxis.m_MaxSpeed = 0; // No rotation
-        }
+        }*/
     }
 }

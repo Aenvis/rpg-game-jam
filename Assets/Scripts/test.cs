@@ -5,6 +5,8 @@ using UnityEngine;
 public class test : MonoBehaviour
 {
     public ItemData item1;
+    public ItemData item2;
+    public ItemData item3;
     public DynamicInventory dynamicInventory;
     // Start is called before the first frame update
     void Start()
@@ -20,11 +22,27 @@ public class test : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            dynamicInventory.AddItem(item1);
+            dynamicInventory.DeleteItemByPosition(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            dynamicInventory.DeleteItem(item1);
+            dynamicInventory.DeleteItemByPosition(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            dynamicInventory.DeleteItemByPosition(2);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            dynamicInventory.AddItem(item1);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            dynamicInventory.AddItem(item2);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            dynamicInventory.AddItem(item3);
         }
     }
 }

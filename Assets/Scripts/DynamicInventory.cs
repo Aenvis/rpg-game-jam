@@ -37,6 +37,18 @@ public class DynamicInventory : MonoBehaviour
         Debug.Log("You don't have this item in inventory");
         return false;
     }
+    public bool DeleteItemByPosition(int position)
+    {
+        if (items[position] != null)
+        {
+            items[position] = null;
+            InventoryEvent.Instance.MyEvent.Invoke();
+            Debug.Log("Item successuffly deleted from position " + position);
+            return true;
+        }
+        Debug.Log("You don't have this item in inventory");
+        return false;
+    }
     public int FindItem(ItemData itemToFind)
     {
         for (int i = 0; i < items.Length; i++)

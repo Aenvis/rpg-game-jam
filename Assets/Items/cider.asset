@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
-  m_Name: dupa
+  m_Name: cider
   m_EditorClassIdentifier: 
-  itemName: dupa
+  itemName: 
   icon: {fileID: 0}
   model: {fileID: 0}
   description: 

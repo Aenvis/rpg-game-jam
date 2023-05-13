@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class UIScript : MonoBehaviour
             }
             else
             {
+                slots[i].GetComponent<Image>().sprite = items[i].icon;
                 slots[i].SetActive(true);
             }
         }

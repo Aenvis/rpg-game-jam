@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5170034007640656399}
   - component: {fileID: 8075091695115650474}
   - component: {fileID: 6337842673730433376}
-  - component: {fileID: 2517375357699431544}
+  - component: {fileID: 4809360753481861714}
+  - component: {fileID: 7412275217535044424}
   m_Layer: 0
   m_Name: L-Shaped Desk
   m_TagString: Untagged
@@ -84,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2517375357699431544
-MeshCollider:
+--- !u!65 &4809360753481861714
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,7 +95,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2150253047649979177, guid: c8dce477da05e754e8e912991abfd95f, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.04, y: 0.82543135, z: 2.418148}
+  m_Center: {x: -0.71, y: 0, z: 0}
+--- !u!65 &7412275217535044424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5545186943235264693}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4308896, y: 1, z: 0.94}
+  m_Center: {x: 0, y: 0, z: -0.75}

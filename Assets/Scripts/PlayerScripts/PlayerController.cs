@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DefaultNamespace;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // Check if pickup or dead animation is playing
-        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead"))
+        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap"))
         {
             return;
         }
@@ -58,11 +59,12 @@ public class PlayerController : MonoBehaviour
                     itemToPickUp = hit.collider.gameObject;
                     if (itemToPickUp.layer == LayerMask.NameToLayer("Stary"))
                     {
-                        animator.SetBool("Pour", true);  // play the special pickup animation
+                        Pour();
                     }
-                    else
+                    else if(itemToPickUp.layer == LayerMask.NameToLayer("Interactable"))
                     {
-                        animator.SetBool("Pickup", true);
+                        var alcoholData = itemToPickUp.GetComponent<ItemData>();
+                        Pickup(alcoholData);
                     }
                 }
             }
@@ -98,11 +100,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Assuming left mouse button for attack
         {
-            animator.SetBool("Attack", true);
-        }
-        else
-        {
-            animator.SetBool("Attack", false);
+            animator.SetBool("Slap", true);
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
@@ -117,6 +115,22 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+    private void Pickup(ItemData item)
+    {
+        if (!GameManager.Instance.PlayerCanPickup) return;
+
+        animator.SetBool("Pickup", true);
+        GameManager.Instance.PickupAlcohol(item);
+    }
+
+    private void Pour()
+    {
+        if (!GameManager.Instance.PlayerCanPour) return;
+        
+        animator.SetBool("Pour", true);  // play the special pickup animation
+        GameManager.Instance.PourAlcohol();
+    }
+
     public void EndPickup()
     {
         //TODO PODNOSZENIE DO EQ
@@ -126,6 +140,11 @@ public class PlayerController : MonoBehaviour
             itemToPickUp = null;
         }
         animator.SetBool("Pickup", false);
+    }
+
+    public void EndSlap()
+    {
+        animator.SetBool("Slap", false);
     }
 
     public void EndPour()

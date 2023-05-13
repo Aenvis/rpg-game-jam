@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Check if pickup or dead animation is playing
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Pickup") || animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+        {
+            return; // Do not execute further code in the Update function
+        }
+
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         direction = Quaternion.Euler(0, freeLookCamera.m_XAxis.Value, 0) * direction;
 
@@ -63,6 +69,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("Attack", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetBool("Pickup", true);
+        }
+        else
+        {
+            animator.SetBool("Pickup", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            animator.SetBool("Dead", true);
+        }
+        else
+        {
+            animator.SetBool("Dead", false);
         }
 
         moveDirection.y -= gravity * Time.deltaTime;

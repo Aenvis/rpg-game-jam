@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Beer
   alcoholData: {fileID: 11400000, guid: c8431b9611913c540af33815d521835e, type: 2}
   icon: {fileID: 21300000, guid: 300749e2807d486409a10834ef72bdbc, type: 3}
-  model: {fileID: 0}
+  model: {fileID: 919132149155446097, guid: 0aae0ebe61bc9bd4698be35933963409, type: 3}
   description: 

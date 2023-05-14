@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
-  m_Name: Voodka
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Vodka
-  alcoholData: {fileID: 11400000, guid: 0040d411fa59c2a4d80e1907dce708ed, type: 2}
-  icon: {fileID: 21300000, guid: 37e9a0d1d5c705548b188532e49bda3a, type: 3}
-  model: {fileID: 919132149155446097, guid: 37f6f1fd974ef8445978e89620b90697, type: 3}
+  m_Name: whiskey
+  m_EditorClassIdentifier: 
+  itemName: Whiskey
+  alcoholData: {fileID: 11400000, guid: 04cc8debfc07e784a91f1ef4f6485fd1, type: 2}
+  icon: {fileID: 21300000, guid: 888743a52a91aa643a2569be3d4061a4, type: 3}
+  model: {fileID: 919132149155446097, guid: fe311592a30a32f44a6987c659b8def3, type: 3}
   description: 

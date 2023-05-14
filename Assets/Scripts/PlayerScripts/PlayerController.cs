@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if(itemToPickUp.layer == LayerMask.NameToLayer("Interactable"))
                     {
-                        var alcoholData = itemToPickUp.GetComponent<ItemData>();
+                        var alcoholData = itemToPickUp.GetComponent<Alcohol>();
                         Pickup(alcoholData);
                     }
                 }
@@ -109,12 +109,12 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    private void Pickup(ItemData item)
+    private void Pickup(Alcohol item)
     {
         if (!GameManager.Instance.PlayerCanPickup) return;
 
         animator.SetBool("Pickup", true);
-        GameManager.Instance.PickupAlcohol(item);
+        GameManager.Instance.PickupAlcohol(item.data);
     }
 
     private void Pour()
@@ -151,5 +151,10 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         animator.SetBool("Dead", true);
+    }
+
+    public void EndDeath()
+    {
+        animator.SetBool("Dead", false);
     }
 }

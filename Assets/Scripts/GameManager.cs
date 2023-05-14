@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private StaryController stary;
     
     private PerMileMeter _perMileMeter;
+    private bool gameHasEnded = false;
     public UnityEvent EndGameEvent;
 
     public bool PlayerCanPickup => player.CanPickup;
@@ -43,9 +44,12 @@ public class GameManager : MonoBehaviour
     {
         _perMileMeter.Add(-factor);
         if(perMileValueTxt is not null) perMileValueTxt.text = _perMileMeter.Value.ToString();
-        
-        if (_perMileMeter.Value <= 0)
-            EndGame();        
+
+        if (_perMileMeter.Value <= 0 && !gameHasEnded)
+        {
+            gameHasEnded = true;
+            EndGame();
+        }
     }
 
     private void SeedPlayerData()
@@ -63,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void PickupAlcohol(ItemData item)
     {
         player.Pickup(item.alcoholData);
+        inventory.AddItem(item);
     }
 
     public void PourAlcohol()
@@ -78,7 +83,13 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        //TODO ADD LOGIC WITH METER
+
+        // Position stary in front of the player
+        stary.gameObject.transform.position = player.transform.position + player.transform.forward * 1.0f;
+
+        // Rotate stary to face the opposite direction of the player
+        stary.gameObject.transform.rotation = player.transform.rotation * Quaternion.Euler(0, 180, 0);
+
         EndGameEvent.Invoke();
     }
 }

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     
     private PerMileMeter _perMileMeter;
     private bool gameHasEnded = false;
-    private ItemData lastAdded = null;
+    public ItemData itemInHand = null;
     public UnityEvent EndGameEvent;
 
     public bool PlayerCanPickup => player.CanPickup;
@@ -70,10 +70,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetItemInHand(int i)
+    {
+        if (inventory.items[i] == null)
+        {
+            player.Pour();
+        }
+        else
+        {
+            player.Swap(inventory.items[i].alcoholData);
+        }
+        itemInHand = inventory.items[i];
+    }
+
     public void PickupAlcohol(ItemData item)
     {
         player.Pickup(item.alcoholData);
-        lastAdded = item;
+        itemInHand = item;
         inventory.AddItem(item);
     }
 
@@ -86,7 +99,8 @@ public class GameManager : MonoBehaviour
         
         Debug.Log($"Added: {player.AlcoholFactor * startPerMileValue}");
         player.Pour();
-        if(lastAdded != null) inventory.DeleteItem(lastAdded);
+        if(itemInHand != null) inventory.DeleteItem(itemInHand);
+
     }
 
     private void EndGame()

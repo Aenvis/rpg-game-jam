@@ -15,6 +15,9 @@ public class AlcoholSO : ScriptableObject
         Wine,
         Cider,
         Hooch,
+        Whiskey,
+        Tequilla,
+        Rum
     }
 
     public Alcohol type;

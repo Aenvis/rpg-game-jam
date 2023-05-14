@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
-  m_Name: beer
+  m_Name: Beer
   m_EditorClassIdentifier: 
-  itemName: beer
+  itemName: Beer
   alcoholData: {fileID: 11400000, guid: c8431b9611913c540af33815d521835e, type: 2}
   icon: {fileID: 21300000, guid: 300749e2807d486409a10834ef72bdbc, type: 3}
   model: {fileID: 0}

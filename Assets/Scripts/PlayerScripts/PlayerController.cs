@@ -158,4 +158,9 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Dead", true);
     }
+
+    public void EndDeath()
+    {
+        animator.SetBool("Dead", false);
+    }
 }

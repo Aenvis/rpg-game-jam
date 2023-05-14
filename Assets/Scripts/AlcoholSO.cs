@@ -11,7 +11,10 @@ public class AlcoholSO : ScriptableObject
     public enum Alcohol
     {
         Beer,
-        Vodka
+        Vodka,
+        Wine,
+        Cider,
+        Hooch,
     }
 
     public Alcohol type;

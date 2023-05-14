@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
-  m_Name: hooch
+  m_Name: Hooch
   m_EditorClassIdentifier: 
-  itemName: hooch
+  itemName: Hooch
+  alcoholData: {fileID: 11400000, guid: a88a5ee6956efb34fb3b5211bf2e0181, type: 2}
   icon: {fileID: 21300000, guid: f14208f2c57f15b40805c752f08986ab, type: 3}
   model: {fileID: 919132149155446097, guid: b34715f7601e3c248a3511a82ec9cccb, type: 3}
   description: 

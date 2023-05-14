@@ -48,9 +48,11 @@ MonoBehaviour:
   player: {fileID: 0}
   inventory: {fileID: 0}
   perMileValueTxt: {fileID: 0}
+  deathScreen: {fileID: 0}
   startPerMileValue: 10000
-  factor: 5
+  factor: 1
   stary: {fileID: 0}
+  itemInHand: {fileID: 0}
   EndGameEvent:
     m_PersistentCalls:
       m_Calls: []

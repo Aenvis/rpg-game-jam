@@ -9,7 +9,7 @@ public class UIScript : MonoBehaviour
     public DynamicInventory inventory;
     public GameObject[] slots;
     public ItemData[] items;
-    public SpriteRenderer bar;
+    public Image bar;
     
     public void GetInventory()
     {
@@ -42,7 +42,7 @@ public class UIScript : MonoBehaviour
 
     public void UpdatePerMileMeter()
     {
-         = GameManager.Instance._perMileMeter.Value / GameManager.Instance.startPerMileValue;
+       bar.fillAmount  = GameManager.Instance._perMileMeter.Value / GameManager.Instance.startPerMileValue;
     }
     
 }

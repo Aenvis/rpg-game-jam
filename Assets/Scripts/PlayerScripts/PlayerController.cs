@@ -7,6 +7,7 @@ using DefaultNamespace;
 public class PlayerController : MonoBehaviour
 {
     public CinemachineFreeLook freeLookCamera;
+    public AudioClip audioClip;
     public float speed = 6.0f;
     public float rotationSpeed = 5.0f;
     public float jumpSpeed = 8.0f;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.Instance.PlayerCanPour) return;
         
         animator.SetBool("Pour", true);  // play the special pickup animation
-        SoundManager.Instance.PlaySound();
+        SoundManager.Instance.PlaySound(audioClip);
         GameManager.Instance.PourAlcohol();
     }
 
@@ -161,6 +162,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndDeath()
     {
+        SoundManager.Instance.StopSound();
         animator.SetBool("Dead", false);
     }
 }

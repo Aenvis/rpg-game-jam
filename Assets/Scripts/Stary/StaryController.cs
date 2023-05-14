@@ -5,6 +5,7 @@ using UnityEngine;
 public class StaryController : MonoBehaviour
 {
     public Animator animator;
+    public AudioClip clip;
 
     private void Start()
     {
@@ -15,12 +16,13 @@ public class StaryController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         animator.SetBool("FatherSlap", true);
+        SoundManager.Instance.StopSound();
     }
-
 
     public void SlapKid()
     {
         StartCoroutine("SlapRoutine");
+        SoundManager.Instance.PlaySound(clip);
     }
 
     public void EndSlap()

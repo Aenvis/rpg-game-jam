@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private DynamicInventory inventory;
     [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
+    [SerializeField] private GameObject deathScreen;
     [SerializeField] private float startPerMileValue;
     [SerializeField] private float factor;
     [SerializeField] private StaryController stary;
@@ -85,17 +87,19 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Added: {player.AlcoholFactor * startPerMileValue}");
         player.Pour();
         if(lastAdded != null) inventory.DeleteItem(lastAdded);
-
     }
 
     private void EndGame()
     {
+        EndGameEvent.Invoke();
         // Position stary in front of the player
-        stary.gameObject.transform.position = player.transform.position + player.transform.forward * 1.0f;
+        var playerTransform = player.GetComponentInChildren<PlayerController>().gameObject.transform;
+        stary.gameObject.transform.position = playerTransform.position + playerTransform.forward * 1.0f;
 
         // Rotate stary to face the opposite direction of the player
-        stary.gameObject.transform.rotation = player.transform.rotation * Quaternion.Euler(0, 180, 0);
+        stary.gameObject.transform.rotation = playerTransform.rotation * Quaternion.Euler(0, 180, 0);
 
-        EndGameEvent.Invoke();
     }
+
+    public void ShowDeathScreen() => deathScreen.SetActive(true);
 }

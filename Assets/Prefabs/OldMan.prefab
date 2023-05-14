@@ -552,10 +552,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3701491528093384996}
-  - component: {fileID: 2834771288239114374}
   - component: {fileID: 4041283860501076895}
   - component: {fileID: 4041283860501076892}
   - component: {fileID: 4041283860501076893}
+  - component: {fileID: 2252546613277534832}
   m_Layer: 7
   m_Name: OldMan
   m_TagString: Stary
@@ -578,21 +578,8 @@ Transform:
   - {fileID: 517896901713123905}
   - {fileID: 3521917123367484484}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -88.61, z: 0}
---- !u!65 &2834771288239114374
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4041283860501076894}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.75, z: 1.6}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &4041283860501076895
 Animator:
   serializedVersion: 4
@@ -640,6 +627,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4041283860501076895}
+  clip: {fileID: 8300000, guid: 3b2c5bfcfdb165b4580c2a524c02d3b9, type: 3}
+--- !u!136 &2252546613277534832
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041283860501076894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.74
+  m_Height: 2.25
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!1 &4482748794338129307
 GameObject:
   m_ObjectHideFlags: 0

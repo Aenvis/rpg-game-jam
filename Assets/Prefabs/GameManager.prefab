@@ -44,7 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe0756bf9a03ba4693f1f43c7ac44fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testAlcohol: {fileID: 11400000, guid: 75a38b94ace1fcd4da08581fbf5139de, type: 2}
   player: {fileID: 0}
+  inventory: {fileID: 0}
+  perMileValueTxt: {fileID: 0}
   startPerMileValue: 10000
   factor: 5
-  testAlcohol: {fileID: 11400000, guid: 75a38b94ace1fcd4da08581fbf5139de, type: 2}
+  stary: {fileID: 0}
+  EndGameEvent:
+    m_PersistentCalls:
+      m_Calls: []

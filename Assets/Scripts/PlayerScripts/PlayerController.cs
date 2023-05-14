@@ -163,13 +163,20 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
-        animator.SetBool("Dead", true);
         SoundManager.Instance.DeathSound(omaeWaMouAudioClip);
+        StartCoroutine(KillAnimationRoutine());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
     }
 
+    IEnumerator KillAnimationRoutine()
+    {
+        yield return new WaitForSeconds(1.7f);
+        animator.SetBool("Dead", true);
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.ShowDeathScreen();
+    }
+    
     public void EndDeath()
     {
         SoundManager.Instance.StopSound();

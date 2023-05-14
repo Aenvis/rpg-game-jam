@@ -9,7 +9,7 @@ public class UIScript : MonoBehaviour
     public DynamicInventory inventory;
     public GameObject[] slots;
     public ItemData[] items;
-    public Slider slider;
+    public SpriteRenderer bar;
     
     public void GetInventory()
     {
@@ -42,7 +42,7 @@ public class UIScript : MonoBehaviour
 
     public void UpdatePerMileMeter()
     {
-        slider.value = GameManager.Instance._perMileMeter.Value;
+         = GameManager.Instance._perMileMeter.Value / GameManager.Instance.startPerMileValue;
     }
     
 }

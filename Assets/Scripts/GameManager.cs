@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DynamicInventory inventory;
     [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
     [SerializeField] private GameObject deathScreen;
-    [SerializeField] private float startPerMileValue;
+    [SerializeField] public float startPerMileValue;
     [SerializeField] private float factor;
     [SerializeField] private StaryController stary;
     [SerializeField] private HighlightBox highlightBox;

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WineData
   m_EditorClassIdentifier: 
   type: 2
-  alcoholFactor: 0
+  alcoholFactor: 0.47

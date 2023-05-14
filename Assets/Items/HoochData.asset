@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HoochData
   m_EditorClassIdentifier: 
   type: 4
-  alcoholFactor: 0
+  alcoholFactor: 1

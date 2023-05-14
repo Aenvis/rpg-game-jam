@@ -27,6 +27,11 @@ public class SoundManager : MonoBehaviour
         _effectsSource.Play();
     }
 
+    public void DeathSound(AudioClip clip)
+    {
+        _musicSource.Stop();
+        _musicSource.PlayOneShot(clip);
+    }
     public void StopSound()
     {
         _effectsSource.Stop();

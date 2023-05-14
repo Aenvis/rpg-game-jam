@@ -9,6 +9,7 @@ public class UIScript : MonoBehaviour
     public DynamicInventory inventory;
     public GameObject[] slots;
     public ItemData[] items;
+    public Slider slider;
     
     public void GetInventory()
     {
@@ -36,6 +37,12 @@ public class UIScript : MonoBehaviour
     void Start()
     {
         InventoryEvent.Instance.MyEvent.AddListener(GetInventory);
+        GameManager.Instance.valueChanged.AddListener(UpdatePerMileMeter);
+    }
+
+    public void UpdatePerMileMeter()
+    {
+        slider.value = GameManager.Instance._perMileMeter.Value;
     }
     
 }

@@ -11,8 +11,20 @@ public class StaryController : MonoBehaviour
         GameManager.Instance.EndGameEvent.AddListener(SlapKid);
     }
 
+    IEnumerator SlapRoutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        animator.SetBool("FatherSlap", true);
+    }
+
+
     public void SlapKid()
     {
-        animator.SetBool("Slap", true);
+        StartCoroutine("SlapRoutine");
+    }
+
+    public void EndSlap()
+    {
+        animator.SetBool("FatherSlap", false);
     }
 }

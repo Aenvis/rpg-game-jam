@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VodkaData
   m_EditorClassIdentifier: 
   type: 1
-  alcoholFactor: 0
+  alcoholFactor: 1

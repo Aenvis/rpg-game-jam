@@ -14,7 +14,7 @@ public class StaryController : MonoBehaviour
 
     IEnumerator SlapRoutine()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         animator.SetBool("FatherSlap", true);
     }
 

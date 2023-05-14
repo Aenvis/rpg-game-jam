@@ -24,10 +24,10 @@ public class AlcoholSO : ScriptableObject
     {
         get
         {
-            if (type is Alcohol.Beer) return alcoholFactor;
+            if (type is not Alcohol.Beer) return alcoholFactor;
             
-            var random = Random.Range(0, 2);
-            return random == 0 ? math.abs(alcoholFactor) : -math.abs(alcoholFactor);
+            var random = Random.Range(0, 10);
+            return random > 3 ? math.abs(alcoholFactor) : -math.abs(alcoholFactor);
         }
     }
 }

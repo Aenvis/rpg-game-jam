@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = 20.0f;
     public float pickupRange = 2.0f;
     public float pickupAngle = 45.0f;
+    public int positionInInventory = 1;
     public int pickupRays = 10;
     public int verticalPickupRays = 10;
     public float rayOriginHeight = 1.0f;
@@ -110,6 +111,25 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Assuming left mouse button for attack
         {
             animator.SetBool("Slap", true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            positionInInventory = 0;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            positionInInventory = 1;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            positionInInventory = 2;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
         }
 
         moveDirection.y -= gravity * Time.deltaTime;

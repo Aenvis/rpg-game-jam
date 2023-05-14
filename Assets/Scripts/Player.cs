@@ -19,6 +19,11 @@ namespace DefaultNamespace
             alcoholInHand = newAlcohol;
         }
 
+        public void Swap(AlcoholSO alcohol)
+        {
+            alcoholInHand = alcohol;
+        }
+
         public void Pour() => alcoholInHand = null;
     }
 }

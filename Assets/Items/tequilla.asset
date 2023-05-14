@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
-  m_Name: Voodka
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Vodka
-  alcoholData: {fileID: 11400000, guid: 0040d411fa59c2a4d80e1907dce708ed, type: 2}
-  icon: {fileID: 21300000, guid: 37e9a0d1d5c705548b188532e49bda3a, type: 3}
-  model: {fileID: 919132149155446097, guid: 37f6f1fd974ef8445978e89620b90697, type: 3}
+  m_Name: tequilla
+  m_EditorClassIdentifier: 
+  itemName: Tequilla
+  alcoholData: {fileID: 11400000, guid: c32525eef7a09724085d0a921712c6c5, type: 2}
+  icon: {fileID: 21300000, guid: 74195e017be4e3b4a82cfec6909c27a5, type: 3}
+  model: {fileID: 919132149155446097, guid: 41143ac2d3962bf468afa1436717c1ad, type: 3}
   description: 

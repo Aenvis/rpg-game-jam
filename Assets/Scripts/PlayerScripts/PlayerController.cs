@@ -40,6 +40,12 @@ public class PlayerController : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // Check if pickup or dead animation is playing
+        if (stateInfo.IsName("Pour") && stateInfo.normalizedTime >= 0.95F)
+        {
+            SoundManager.Instance.StopSound();
+            Debug.Log("test");
+        }
+
         if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap"))
         {
             return;
@@ -122,6 +128,7 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.Instance.PlayerCanPour) return;
         
         animator.SetBool("Pour", true);  // play the special pickup animation
+        SoundManager.Instance.PlaySound();
         GameManager.Instance.PourAlcohol();
     }
 
@@ -150,10 +157,5 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         animator.SetBool("Dead", true);
-    }
-
-    public void EndDeath()
-    {
-        animator.SetBool("Dead", false);
     }
 }

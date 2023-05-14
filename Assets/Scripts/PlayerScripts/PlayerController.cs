@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private Animator animator;
     private GameObject itemToPickUp;
+    private bool staryWstal = false;
 
     void Start()
     {
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("test");
         }
 
-        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap"))
+        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap") || staryWstal)
         {
             return;
         }
@@ -184,6 +185,7 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         SoundManager.Instance.DeathSound(omaeWaMouAudioClip);
+        staryWstal = true;
         StartCoroutine(KillAnimationRoutine());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

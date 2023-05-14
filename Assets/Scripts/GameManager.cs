@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float startPerMileValue;
     [SerializeField] private float factor;
     [SerializeField] private StaryController stary;
+    [SerializeField] private HighlightBox highlightBox;
     
     private PerMileMeter _perMileMeter;
     private bool gameHasEnded = false;
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
             player.Swap(inventory.items[i].alcoholData);
         }
         itemInHand = inventory.items[i];
+        highlightBox.Highligth(i);
     }
 
     public void PickupAlcohol(ItemData item)

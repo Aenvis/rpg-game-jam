@@ -2,19 +2,22 @@ using DefaultNamespace;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] private AlcoholSO testAlcohol;
-    [SerializeField]private Player player;
+    [SerializeField] private Player player;
     [SerializeField] private DynamicInventory inventory;
     [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
     [SerializeField] private float startPerMileValue;
     [SerializeField] private float factor;
+    [SerializeField] private StaryController stary;
     
     private PerMileMeter _perMileMeter;
+    public UnityEvent EndGameEvent;
 
     public bool PlayerCanPickup => player.CanPickup;
     public bool PlayerCanPour => player.HasAlcoholInHand;
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        Debug.Log("End game");
+        //TODO ADD LOGIC WITH METER
+        EndGameEvent.Invoke();
     }
 }

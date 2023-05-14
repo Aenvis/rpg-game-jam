@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.Instance.PlayerCanPour) return;
         
         animator.SetBool("Pour", true);  // play the special pickup animation
+        SoundManager.Instance.PlaySound();
         GameManager.Instance.PourAlcohol();
     }
 

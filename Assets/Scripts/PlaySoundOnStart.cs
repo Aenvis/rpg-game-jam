@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlaySoundOnStart : MonoBehaviour
 {
-    [SerializeField] private AudioClip _clip;
 
     void Start()
     {
-        SoundManager.Instance.PlaySound(_clip);
+        SoundManager.Instance.PlaySound();
     }
 
 }

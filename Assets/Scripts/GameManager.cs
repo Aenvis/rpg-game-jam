@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public ItemData itemInHand = null;
     public UnityEvent EndGameEvent;
 
-    public bool PlayerCanPickup => player.CanPickup;
+    public bool PlayerCanPickup => !inventory.IsFull();
     public bool PlayerCanPour => player.HasAlcoholInHand;
 
     private void Awake()

@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes/UI.unity.meta
+guid: b727bbeb45aa8864abb122776ac0676f
+DefaultImporter:
+=======
 guid: 424d7a49709162a4683e463f638ce57f
 PrefabImporter:
+>>>>>>> master:Assets/Prefabs/Alcohols/Rum.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

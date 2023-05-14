@@ -15,15 +15,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DynamicInventory inventory;
     [SerializeField] [CanBeNull] private TMP_Text perMileValueTxt;
     [SerializeField] private GameObject deathScreen;
-    [SerializeField] private float startPerMileValue;
+    [SerializeField] public float startPerMileValue;
     [SerializeField] private float factor;
     [SerializeField] private StaryController stary;
     [SerializeField] private HighlightBox highlightBox;
     
-    private PerMileMeter _perMileMeter;
+    public PerMileMeter _perMileMeter;
     private bool gameHasEnded = false;
     public ItemData itemInHand = null;
     public UnityEvent EndGameEvent;
+    public UnityEvent valueChanged;
 
     public bool PlayerCanPickup => !inventory.IsFull();
     public bool PlayerCanPour => player.HasAlcoholInHand;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
     {
         if (gameHasEnded) return;
         _perMileMeter.Add(-factor);
+        valueChanged?.Invoke();
+        if (_perMileMeter.Value > startPerMileValue) _perMileMeter.Value = startPerMileValue; 
         if(perMileValueTxt is not null) perMileValueTxt.text = _perMileMeter.Value.ToString();
 
         if (_perMileMeter.Value <= 0 && !gameHasEnded)

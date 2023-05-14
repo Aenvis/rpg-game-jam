@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BeerData
   m_EditorClassIdentifier: 
   type: 0
-  alcoholFactor: 0
+  alcoholFactor: 0.33

@@ -1,6 +1,6 @@
 ﻿public class PerMileMeter
 {
-    public float Value { get; private set; }
+    public float Value { get; set; }
 
     public PerMileMeter(float startValue)
     {

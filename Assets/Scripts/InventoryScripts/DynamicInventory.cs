@@ -60,4 +60,14 @@ public class DynamicInventory : MonoBehaviour
         }
         return -1;
     }
+
+    public bool IsFull()
+    {
+        foreach (var item in items)
+        {
+            if (item is null) return false;
+        }
+
+        return true;
+    }
 }

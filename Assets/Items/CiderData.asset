@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ea65fb43d781546a69c9a909e4a268, type: 3}
   m_Name: CiderData
   m_EditorClassIdentifier: 
-  type: 0
+  type: 3
   alcoholFactor: 0

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af87eacc060f36f409b0ffe8f04106da, type: 3}
+  m_Name: hooch
+  m_EditorClassIdentifier: 
+  itemName: Hooch
+  alcoholData: {fileID: 11400000, guid: a88a5ee6956efb34fb3b5211bf2e0181, type: 2}
+  icon: {fileID: 21300000, guid: f14208f2c57f15b40805c752f08986ab, type: 3}
+  model: {fileID: 919132149155446097, guid: b34715f7601e3c248a3511a82ec9cccb, type: 3}
+  description: 

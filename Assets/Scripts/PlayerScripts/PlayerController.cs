@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DefaultNamespace;
+using UnityEditor;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public CinemachineFreeLook freeLookCamera;
+    public AudioClip pourAudioClip;
+    public AudioClip omaeWaMouAudioClip;
     public float speed = 6.0f;
     public float rotationSpeed = 5.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public float pickupRange = 2.0f;
     public float pickupAngle = 45.0f;
+    public int positionInInventory = 1;
     public int pickupRays = 10;
     public int verticalPickupRays = 10;
     public float rayOriginHeight = 1.0f;
@@ -22,9 +27,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private Animator animator;
     private GameObject itemToPickUp;
+    private bool staryWstal = false;
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         if (freeLookCamera == null)
         {
             Debug.LogError("Free Look Camera is not attached.");
@@ -32,13 +40,21 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        GameManager.Instance.EndGameEvent.AddListener(KillPlayer);
+
     }
 
     void Update()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // Check if pickup or dead animation is playing
-        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap"))
+        if (stateInfo.IsName("Pour") && stateInfo.normalizedTime >= 0.95F)
+        {
+            SoundManager.Instance.StopSound();
+            Debug.Log("test");
+        }
+
+        if (stateInfo.IsName("Pickup") || stateInfo.IsName("Pour") || stateInfo.IsName("Dead") || stateInfo.IsName("Slap") || staryWstal)
         {
             return;
         }
@@ -63,8 +79,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if(itemToPickUp.layer == LayerMask.NameToLayer("Interactable"))
                     {
-                        var alcoholData = itemToPickUp.GetComponent<ItemData>();
-                        Pickup(alcoholData);
+                        Pickup();
                     }
                 }
             }
@@ -102,25 +117,35 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Slap", true);
         }
-        if (Input.GetKeyDown(KeyCode.B))
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            animator.SetBool("Dead", true);
+            positionInInventory = 0;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
         }
-        else
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            animator.SetBool("Dead", false);
+            positionInInventory = 1;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            positionInInventory = 2;
+            GameManager.Instance.SetItemInHand(positionInInventory);
+            Debug.Log("Position set to " + positionInInventory);
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    private void Pickup(ItemData item)
+    private void Pickup()
     {
         if (!GameManager.Instance.PlayerCanPickup) return;
-
+        Debug.Log("Start pickup");
         animator.SetBool("Pickup", true);
-        GameManager.Instance.PickupAlcohol(item);
     }
 
     private void Pour()
@@ -128,17 +153,21 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.Instance.PlayerCanPour) return;
         
         animator.SetBool("Pour", true);  // play the special pickup animation
+        SoundManager.Instance.PlaySound(pourAudioClip);
         GameManager.Instance.PourAlcohol();
     }
 
     public void EndPickup()
     {
-        //TODO PODNOSZENIE DO EQ
+        var item = itemToPickUp.GetComponent<Alcohol>();
+        GameManager.Instance.PickupAlcohol(item.data);
+        
         if (itemToPickUp != null)
         {
             Destroy(itemToPickUp);
             itemToPickUp = null;
         }
+        Debug.Log("End pickup");
         animator.SetBool("Pickup", false);
     }
 
@@ -151,5 +180,28 @@ public class PlayerController : MonoBehaviour
     {
         //TODO STARY PIJANY
         animator.SetBool("Pour", false);
+    }
+
+    public void KillPlayer()
+    {
+        SoundManager.Instance.DeathSound(omaeWaMouAudioClip);
+        staryWstal = true;
+        StartCoroutine(KillAnimationRoutine());
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    IEnumerator KillAnimationRoutine()
+    {
+        yield return new WaitForSeconds(1.7f);
+        animator.SetBool("Dead", true);
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.ShowDeathScreen();
+    }
+    
+    public void EndDeath()
+    {
+        SoundManager.Instance.StopSound();
+        animator.SetBool("Dead", false);
     }
 }

@@ -16,13 +16,11 @@ public class StaryController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         animator.SetBool("FatherSlap", true);
-        SoundManager.Instance.StopSound();
     }
 
     public void SlapKid()
     {
         StartCoroutine("SlapRoutine");
-        SoundManager.Instance.PlaySound(clip);
     }
 
     public void EndSlap()
